@@ -1,0 +1,49 @@
+.home{
+    width: 80%;
+    margin: 2rem auto;
+}
+.home-content{
+    max-width: 900px;
+    margin: 20px auto;
+    border: 1px solid rgb(196, 195, 195);
+    border-radius: 10px;
+    color: #333;
+    padding: 20px;
+    cursor: pointer;
+    transition: 0.3s ease-in-out all;
+}
+.home-content:hover{
+    box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+}
+.home-profile{
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+}
+.home-profile > p{
+    margin-left: 10px;
+    font-weight: 600;
+}
+.home-content > h2{
+    margin-bottom: 10px;
+}
+.home-content > p{
+    margin-bottom: 20px;
+    color: gray;
+}
+.home-icons{
+    display: flex;
+    align-items: center;
+    margin-top: 10px;
+    color: darkgray;
+}
+.home-icons > .like{
+    font-size: 24px;
+    margin-right: 10px;
+    cursor: pointer;
+}
+.home-icons > .bookmark{
+    font-size: 24px;
+    margin-right: 10px;
+    cursor: pointer;
+}

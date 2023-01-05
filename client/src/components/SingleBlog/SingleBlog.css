@@ -1,0 +1,96 @@
+.singlePost{
+    width: 80%;
+    margin: 2rem auto;
+}
+.singlepost-profile{
+    display:  flex;
+    align-items: center;
+    padding: 0 20px;
+    justify-content: space-between;
+}
+.profile-info{
+    display: flex;
+    align-items: center;
+}
+.profile-info > h3{
+    margin-left: 10px;
+    color: #333;
+}
+.email{
+    font-size: 22px;
+    margin-right: 10px;
+    color: #333;
+    cursor: pointer;
+    transition: 0.3s ease-in-out all;
+}
+.email:hover{
+    color: #7c70c2;
+}
+.save{
+    font-size: 22px;
+    margin-left: 10px;
+    color: #333;
+    cursor: pointer;
+    transition: 0.3s ease-in-out all;
+}
+.save:hover {
+    color: #7c70c2;
+}
+.singlepost-content{
+    margin-top: 1.5rem;
+    padding: 0 20px;
+}
+.singlepost-content > h2{
+    font-size: 2.8rem;
+    margin-bottom: 1.4rem;
+    color: #333;
+}
+.story-para{
+    margin-bottom: 2rem;
+    color: rgb(75, 74, 74);
+    font-size: 20px;
+    line-height: 32px;
+    letter-spacing: -0.003em;
+}
+.post-heart{
+    font-size: 27px;
+    margin-right: 10px;
+    color: #333;
+    cursor: pointer;
+    transition: 0.3s ease-in-out all;
+}
+.liked{
+    color: #D2042D;
+}
+.liked:hover{
+    color:  #b6082b !important;
+}
+.post-heart:hover {
+    color: #7c70c2;
+}
+.post-comment{
+    font-size: 27px;
+    margin: 0 10px;
+    color: #333;
+    cursor: pointer;
+    transition: 0.3s ease-in-out all;
+}
+.post-comment:hover {
+    color: #7c70c2;
+}
+.singlepost-function{
+    padding: 0 20px;
+    display: flex;
+    align-items: center;
+}
+.fn-icon{
+    display: flex;
+    align-items: center;
+    margin-right: 10px;
+}
+.fn-icon > p{
+    font-size: 18px;
+    color: #333;
+    font-weight: 600;
+    margin-bottom: 2px;
+}

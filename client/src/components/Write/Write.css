@@ -1,0 +1,47 @@
+.write{
+    width: 80%;
+    margin: 20px auto;
+    display: flex;
+    flex-direction: column;
+}
+.write > input{
+    font-size: 3rem;
+    background-color: transparent;
+    padding: 10px;
+    color: #333;
+    font-family: 'Times New Roman', Times, serif;
+    line-height: 1.25;
+    font-weight: 400;
+    font-style: normal;
+    border: none;
+    outline: none;
+}
+.write > textarea{
+    background-color: transparent;
+    border: none;
+    padding: 10px;
+    font-family: inherit;
+    font-weight: 400;
+    color: #333;
+    outline: none;
+    font-size: 21px;
+    line-height: 1.28;
+    letter-spacing: -.003em;
+    resize: none;
+}
+.publish{
+    width: 120px;
+    margin-top: 3rem;
+    padding: 12px;
+    font-size: 16px;
+    border: none;
+    border-radius: 14px;
+    background-color: #7c70c2;
+    color: #dfdee5;
+    cursor: pointer;
+    margin-left: 10px;
+    transition: 0.2s ease-in-out all;
+}
+.publish:hover{
+    background-color: #7368b4;
+}

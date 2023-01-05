@@ -1,0 +1,50 @@
+.profile{
+    width: 80%;
+    margin: 2rem auto;
+}
+.profile-content{
+    width: 200px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 3rem;
+}
+.profile-content > h2{
+    margin-top: 0.3rem;
+    font-size: 2rem;
+    color: #333;
+}
+.user-content{
+    max-width: 900px;
+    margin: 3rem 0;
+}
+.user-list{
+    border: 1px solid rgb(196, 195, 195);
+    border-radius: 10px;
+    color: #333;
+    padding: 20px;
+    margin: 10px 0;
+}
+.user-btn{
+    display: flex;
+    align-items: center;
+    margin-top: 4rem
+}
+.user-btn > button{
+    padding: 13px;
+    width: 100px;
+    cursor: pointer;
+    outline: none;
+    border: none;
+    color: #333;
+    border: 1px solid rgb(196, 195, 195);
+    background-color: transparent;
+    border-radius: 19px;
+    margin-right: 10px;
+    transition: 0.3s ease-in-out;
+}
+.user-btn > button:hover{
+    background-color: #7c70c2;
+    border: 1px solid #7c70c2;
+    color: #dfdee5;
+}

@@ -1,0 +1,122 @@
+.auth{
+    position: relative;
+    height: 100vh;
+    overflow: hidden;
+    background: url("https://source.unsplash.com/1600x900/?nature,photography,technology,night,urban,europe") center no-repeat;
+    background-size: cover;
+}
+.auth-gradient{
+    width: 100%;
+    z-index: 1;
+    height: 100vh;
+    background: rgba(0, 0, 0, 0.4);
+    background-image: linear-gradient(to top,
+        rgba(0, 0, 0, 0.4) 0,
+        rgba(0, 0, 0, 0) 60%,
+        rgba(0, 0, 0, 0.4)100%);
+}
+.auth-container{
+    position: absolute;
+    top:20%;
+    text-align: center;
+    z-index: 1;
+    margin-left: auto;
+    margin-right: auto;
+    color: #333;
+    padding: 20px;
+    right: 0;
+    left: 0;
+}
+.sign{
+    width: 500px;
+}
+.auth-login{
+    width: 450px;
+    padding: 70px;
+    margin-left: auto;
+    margin-right: auto;
+    background-color: #fff;
+    border-radius: 8px;
+    display: grid;
+    flex-direction: column;
+}
+.auth-login>input {
+    margin-bottom: 14px;
+    background-color: whitesmoke;
+    outline-width: 0;
+    height: 40px;
+    padding: 5px 15px;
+    border-radius: 5px;
+    border: none;
+}
+.auth-login>h2 {
+    margin-bottom: 1rem;
+    font-size: 20px;
+    font-weight: bolder;
+}
+.auth-login>h1 {
+    cursor: pointer;
+    font-family: 'Chillax', sans-serif;
+    font-size: 35px;
+    margin-bottom: 2rem;
+    color: #6977c5;
+}
+
+.submit-btn {
+    padding: 16px 20px;
+    font-size: 1rem;
+    color: #fff;
+    background-color: #6977c5;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-weight: 600;
+    margin-top: 20px;
+    transition: 0.3s;
+}
+
+.submit-btn:hover {
+    background: #8390dd;
+}
+
+
+.switch-btn {
+    margin-top: 30px;
+    color: gray;
+    font-size: 15px;
+    cursor: pointer;
+    font-weight: 500;
+    transition: 0.3s;
+    cursor: pointer;
+}
+
+.auth-signup {
+    display: flex;
+}
+
+.auth-signup>input {
+    margin-bottom: 14px;
+    outline-width: 0;
+    width: 120px;
+    height: 40px;
+    padding: 5px 15px;
+    border-radius: 5px;
+    border: none;
+}
+
+.auth-fname {
+    margin-right: 10px;
+}
+
+.switch-btn:hover {
+    color: lightgray;
+    text-decoration: underline;
+}
+
+.signIn-btn {
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+    margin-top: 20px;
+    transition: 0.3s;
+}
