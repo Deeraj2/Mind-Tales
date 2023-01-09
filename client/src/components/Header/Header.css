@@ -47,3 +47,31 @@
     color: gray;
     cursor: pointer;
 }
+
+.mobile-search{
+    display: none;
+}
+
+@media (max-width: 590px){
+    .search{
+        display: none;
+    }
+    .mobile-search{
+    display: flex;
+    background-color: #d9d8e0;
+    width: 80%;
+    padding: 7px;
+    align-items: center;
+    border-radius: 15px;
+    margin: 10px auto;
+}
+.mobile-search >input {
+    width: 200px;
+    padding: 8px;
+    margin-left: 5px;
+    background-color: transparent;
+    border: none;
+    outline: none;
+}
+}
+

@@ -11,33 +11,47 @@ const Header = () => {
   const navigate = useNavigate();
 
   return (
-    <div className="header">
-      <div className="title">
-        <h2 onClick={() => navigate("/")}>
-          Mind<span className="name">Tales</span>
-        </h2>
-        <div className="search">
-          <BsSearch className="search-icon" />
-          <input
-            type="text"
-            placeholder="Search"
-            value={search}
-            onChange={(e) => setSearch(e.target.value)}
+    <>
+      <div className="header">
+        <div className="title">
+          <h2 onClick={() => navigate("/")}>
+            Mind<span className="name">Tales</span>
+          </h2>
+          <div className="search">
+            <BsSearch className="search-icon" />
+            <input
+              type="text"
+              placeholder="Search"
+              value={search}
+              onChange={(e) => setSearch(e.target.value)}
+            />
+          </div>
+        </div>
+        <div className="content">
+          <BiEdit
+            className="edit-icon"
+            onClick={() => navigate("/new-story")}
           />
+          <Avatar
+            src={user?.result?.pic}
+            alt={user?.result?.name}
+            sx={{ color: "#7c70c2", cursor: "pointer" }}
+            onClick={() => navigate(`/profile/${user.result._id}`)}
+          >
+            {user?.result?.name.charAt(0)}
+          </Avatar>
         </div>
       </div>
-      <div className="content">
-        <BiEdit className="edit-icon" onClick={() => navigate("/new-story")} />
-        <Avatar
-          src={user?.result?.pic}
-          alt={user?.result?.name}
-          sx={{ color: "#7c70c2", cursor: "pointer" }}
-          onClick={() => navigate(`/profile/${user.result._id}`)}
-        >
-          {user?.result?.name.charAt(0)}
-        </Avatar>
+      <div className="mobile-search">
+        <BsSearch className="search-icon" />
+        <input
+          type="text"
+          placeholder="Search"
+          value={search}
+          onChange={(e) => setSearch(e.target.value)}
+        />
       </div>
-    </div>
+    </>
   );
 };
 

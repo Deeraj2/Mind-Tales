@@ -54,7 +54,7 @@ export default function BlogMenu({ id }) {
       >
         <MenuItem onClick={() => handleUpdate(id)}>Edit</MenuItem>
         <MenuItem>
-          <DeleteModal />
+          <DeleteModal id={id} />
         </MenuItem>
         <MenuItem>
           <UnpublishModal id={id} />
