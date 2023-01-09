@@ -37,13 +37,21 @@
     margin-top: 10px;
     color: darkgray;
 }
-.home-icons > .like{
-    font-size: 24px;
+.like{
+    font-size: 20px;
     margin-right: 10px;
+    z-index: 1;
     cursor: pointer;
+    color: rgb(160, 158, 158) !important;
 }
-.home-icons > .bookmark{
-    font-size: 24px;
+.like-n{
+    color: gray !important;
+    font-size: 15px !important;
+    margin-right: 5px !important;
+}
+ .bookmark{
+    font-size: 19px;
     margin-right: 10px;
     cursor: pointer;
+    z-index: 1;
 }

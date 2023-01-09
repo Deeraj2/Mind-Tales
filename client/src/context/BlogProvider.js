@@ -1,6 +1,5 @@
 import React, { createContext, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import * as api from "../api";
 
 export const blogContext = createContext();
 
@@ -8,15 +7,19 @@ const BlogProvider = ({ children }) => {
   const navigate = useNavigate();
   const [user, setUser] = useState(null);
   const [publishedBlog, setPublishedBlog] = useState([]);
+  const [search, setSearch] = useState("");
+  const [currentId, setCurrentId] = useState(null);
 
-  const fetchPublish = async () => {
-    try {
-      const { data } = await api.fetchBlogs();
-      const result = data.reverse();
-      setPublishedBlog(result);
-    } catch (error) {
-      console.log(error);
+  const searchQuery = () => {
+    let blogs = publishedBlog;
+    if (search) {
+      blogs = blogs.filter(
+        (item) =>
+          item.title.toLowerCase().includes(search) ||
+          item.postedBy.name.toLowerCase().includes(search)
+      );
     }
+    return blogs;
   };
 
   useEffect(() => {
@@ -27,7 +30,17 @@ const BlogProvider = ({ children }) => {
 
   return (
     <blogContext.Provider
-      value={{ user, setUser, publishedBlog, setPublishedBlog }}
+      value={{
+        user,
+        setUser,
+        publishedBlog,
+        setPublishedBlog,
+        search,
+        setSearch,
+        searchQuery,
+        currentId,
+        setCurrentId,
+      }}
     >
       {children}
     </blogContext.Provider>

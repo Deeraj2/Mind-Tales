@@ -4,7 +4,19 @@ const blogModal = mongoose.Schema({
   title: { type: String },
   story: { type: String },
   likes: [{ type: mongoose.Schema.Types.ObjectId, ref: "User" }],
-  comments: [{ type: mongoose.Schema.Types.ObjectId, ref: "Comment" }],
+  savePost: [{ type: mongoose.Schema.Types.ObjectId, ref: "User" }],
+  comments: [
+    {
+      text: String,
+      commentedBy: { type: mongoose.Schema.Types.ObjectId, ref: "User" },
+      replies: [
+        {
+          text: String,
+          commentedBy: { type: mongoose.Schema.Types.ObjectId, ref: "User" },
+        },
+      ],
+    },
+  ],
   isPublished: { type: Boolean, required: true },
   postedBy: { type: mongoose.Schema.Types.ObjectId, ref: "User" },
 });

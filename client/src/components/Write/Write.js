@@ -1,4 +1,4 @@
-import React, { useContext, useRef, useState } from "react";
+import React, { useContext, useEffect, useRef, useState } from "react";
 import "./Write.css";
 import useAutosizeTextArea from "./useAutosizeTextArea";
 import * as api from "../../api";
@@ -6,7 +6,8 @@ import { blogContext } from "../../context/BlogProvider";
 import { useNavigate } from "react-router-dom";
 
 const Write = () => {
-  const { user, publishedBlog, setPublishedBlog } = useContext(blogContext);
+  const { user, currentId, publishedBlog, setCurrentId } =
+    useContext(blogContext);
   const [blog, setBlog] = useState({
     title: "",
     story: "",
@@ -15,6 +16,10 @@ const Write = () => {
   useAutosizeTextArea(textAreaRef.current, blog.story);
 
   const navigate = useNavigate();
+
+  const blogs = currentId
+    ? publishedBlog.find((blog) => blog._id === currentId)
+    : null;
 
   const handleCreate = async () => {
     if (!blog.title || !blog.story) {
@@ -36,12 +41,35 @@ const Write = () => {
     }
   };
 
+  const handleUpdate = async () => {
+    try {
+      const config = {
+        headers: {
+          Authorization: `Bearer ${user.token}`,
+        },
+      };
+      await api.editBlog(currentId, blog, config);
+      navigate(`/blog/${currentId}`);
+      clear();
+      setCurrentId(null);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   const clear = () => {
     setBlog({
       title: "",
       story: "",
     });
   };
+
+  useEffect(() => {
+    if (blogs) setBlog(blogs);
+  }, [blogs]);
+
+  console.log(currentId);
+
   return (
     <div className="write">
       <input
@@ -58,9 +86,17 @@ const Write = () => {
         onChange={(e) => setBlog({ ...blog, story: e.target?.value })}
       />
       {blog.story.length > 0 && (
-        <button className="publish" onClick={handleCreate}>
-          Publish
-        </button>
+        <>
+          {currentId ? (
+            <button className="publish" onClick={handleUpdate}>
+              Update
+            </button>
+          ) : (
+            <button className="publish" onClick={handleCreate}>
+              Publish
+            </button>
+          )}
+        </>
       )}
     </div>
   );

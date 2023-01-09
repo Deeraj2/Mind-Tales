@@ -1,17 +1,23 @@
 import React, { useContext, useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import * as api from "../../api";
 import { Avatar } from "@mui/material";
-import { FiHeart, FiMail, FiBookmark } from "react-icons/fi";
-import { FaHeart } from "react-icons/fa";
-import { BiComment } from "react-icons/bi";
+import { FiHeart } from "react-icons/fi";
+import { FaHeart, FaBookmark } from "react-icons/fa";
+
+import { BsBookmark } from "react-icons/bs";
+import { IoMailOutline } from "react-icons/io5";
 import "./SingleBlog.css";
 import { blogContext } from "../../context/BlogProvider";
+import BlogDrawer from "./BlogDrawer";
+import UnpublishModal from "./UnpublishModal";
+import BlogMenu from "./BlogMenu";
 
 const SingleBlog = () => {
   const { id } = useParams();
   const { user } = useContext(blogContext);
   const [singleBlog, setSingleBlog] = useState();
+  const navigate = useNavigate();
 
   const fetchBlog = async () => {
     try {
@@ -22,7 +28,8 @@ const SingleBlog = () => {
     }
   };
 
-  const likeAPost = async (blogId) => {
+  //Like the blog
+  const likeABlog = async (blogId) => {
     const config = {
       headers: {
         Authorization: `Bearer ${user.token}`,
@@ -37,7 +44,8 @@ const SingleBlog = () => {
     }
   };
 
-  const unlikeAPost = async (blogId) => {
+  //unlike the blog
+  const unlikeABlog = async (blogId) => {
     const config = {
       headers: {
         Authorization: `Bearer ${user.token}`,
@@ -45,6 +53,37 @@ const SingleBlog = () => {
     };
     try {
       const { data } = await api.unlikeapost(blogId, config);
+
+      setSingleBlog(data);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  const saveaBlog = async (blogId) => {
+    const config = {
+      headers: {
+        Authorization: `Bearer ${user.token}`,
+      },
+    };
+
+    try {
+      const { data } = await api.saveapost(blogId, config);
+      setSingleBlog(data);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  const unsaveABlog = async (blogId) => {
+    const config = {
+      headers: {
+        Authorization: `Bearer ${user.token}`,
+      },
+    };
+    try {
+      const { data } = await api.unsaveapost(blogId, config);
+
       setSingleBlog(data);
     } catch (error) {
       console.log(error);
@@ -54,8 +93,6 @@ const SingleBlog = () => {
   useEffect(() => {
     fetchBlog();
   }, [id]);
-
-  console.log(singleBlog);
 
   return (
     <div className="singlePost">
@@ -70,9 +107,24 @@ const SingleBlog = () => {
           </Avatar>
           <h3>{singleBlog?.postedBy.name}</h3>
         </div>
-        <div className="profile-icoons">
-          <FiMail className="email" />
-          <FiBookmark className="save" />
+        <div className="profile-icons">
+          <a href={`mailto:${singleBlog?.postedBy.email}`}>
+            <IoMailOutline className="email" />
+          </a>
+          {singleBlog?.savePost?.includes(user?.result?._id) ? (
+            <FaBookmark
+              className="save saved"
+              onClick={() => unsaveABlog(singleBlog?._id)}
+            />
+          ) : (
+            <BsBookmark
+              className="save"
+              onClick={() => saveaBlog(singleBlog?._id)}
+            />
+          )}
+          {singleBlog?.postedBy._id === user?.result._id && (
+            <BlogMenu id={id} />
+          )}
         </div>
       </div>
       <div className="singlepost-content">
@@ -87,23 +139,24 @@ const SingleBlog = () => {
       </div>
       <div className="singlepost-function">
         <div className="fn-icon">
-          {singleBlog?.likes.includes(user?.result._id) ? (
+          {singleBlog?.likes.includes(user?.result?._id) ? (
             <FaHeart
               className="post-heart liked"
-              onClick={() => unlikeAPost(singleBlog?._id)}
+              onClick={() => unlikeABlog(singleBlog?._id)}
             />
           ) : (
             <FiHeart
               className="post-heart"
-              onClick={() => likeAPost(singleBlog?._id)}
+              onClick={() => likeABlog(singleBlog?._id)}
             />
           )}
           <p>{singleBlog?.likes.length}</p>
         </div>
-        <div className="fn-icon">
-          <BiComment className="post-comment" />
-          <p>{singleBlog?.comments.length}</p>
-        </div>
+        <BlogDrawer
+          id={id}
+          singleBlog={singleBlog}
+          setSingleBlog={setSingleBlog}
+        />
       </div>
     </div>
   );

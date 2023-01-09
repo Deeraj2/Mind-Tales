@@ -8,6 +8,7 @@ const userModal = mongoose.Schema(
     pic: {
       type: String,
     },
+    // savedBlog: [{ type: mongoose.Schema.Types.ObjectId, ref: "Blog" }],
   },
   {
     timestamp: true,

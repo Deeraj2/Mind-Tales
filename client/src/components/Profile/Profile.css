@@ -48,3 +48,90 @@
     border: 1px solid #7c70c2;
     color: #dfdee5;
 }
+.user-title{
+    display: flex;
+    align-items: center;
+    margin-bottom: 2rem
+}
+
+.userBlog{
+    max-width: 900px;
+    margin: 20px auto;
+    border: 1px solid rgb(196, 195, 195);
+    border-radius: 10px;
+    color: #333;
+    padding: 20px;
+    cursor: pointer;
+    transition: 0.3s ease-in-out all;
+}
+.userBlog:hover {
+    box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+}
+.userBlog-profile{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.profile-user{
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+}
+.profile-user>p {
+    margin-left: 10px;
+    font-weight: 600;
+}
+.userBlog-info > h2 {
+    margin-bottom: 10px;
+}
+
+.userBlog-info > p {
+    margin-bottom: 20px;
+    color: gray;
+}
+.activeBtnStyles {
+    outline: none;
+    color: #dfdee5;
+    background-color: #7c70c2;
+    width: 130px;
+    font-size: 16px;
+    padding: 15px;
+    border: none;
+    border-radius: 8px;
+    margin: 5px;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+.notActiveBtnStyles {
+    outline: none;
+    background-color: transparent;
+    font-size: 16px;
+    padding: 15px;
+    width: 130px;
+    border: none;
+    border-radius: 8px;
+    margin: 5px;
+    font-weight: 600;
+    color: gray;
+    cursor: pointer;
+}
+.logout{
+    padding: 10px;
+    width: 100px;
+    border: none;
+    border-radius: 10px;
+    background-color: #7c70c2;
+    color: #dfdee5;
+    outline: none;
+    cursor: pointer;
+    margin: 20px 0;
+    transition: 0.3s ease-in-out all;
+}
+.logout:hover{
+    background-color: #7064b1;
+}
+.profile-content > p{
+    font-weight: 600;
+    color: gray;
+}

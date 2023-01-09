@@ -4,7 +4,6 @@ import mongoose from "mongoose";
 import cors from "cors";
 import userRoutes from "./routes/user.js";
 import blogRoutes from "./routes/blog.js";
-import likeRoutes from "./routes/like.js";
 
 const app = express();
 app.use(bodyParser.json({ limit: "30mb", extended: true }));
@@ -20,7 +19,6 @@ mongoose.connect("mongodb://localhost:27017/MindTaleDB", {
 
 app.use("/user", userRoutes);
 app.use("/blog", blogRoutes);
-app.use("/like", likeRoutes);
 
 app.listen(7000, () => {
   console.log("Server is working in 7000..");

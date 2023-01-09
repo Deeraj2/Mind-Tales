@@ -3,11 +3,14 @@ import { blogContext } from "../../context/BlogProvider";
 import "./Home.css";
 import * as api from "../../api";
 import { Avatar } from "@mui/material";
-import { FiHeart, FiBookmark } from "react-icons/fi";
+import { FiHeart } from "react-icons/fi";
+import { BsBookmark } from "react-icons/bs";
+import { FaHeart, FaBookmark } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
 
 const Home = () => {
-  const { publishedBlog, setPublishedBlog } = useContext(blogContext);
+  const { publishedBlog, setPublishedBlog, user, searchQuery } =
+    useContext(blogContext);
   const navigate = useNavigate();
 
   const fetchPublish = async () => {
@@ -30,12 +33,11 @@ const Home = () => {
 
   return (
     <div className="home">
-      {publishedBlog?.map((blog) => (
-        <>
+      {searchQuery()?.map((blog) => (
+        <div key={blog._id}>
           {blog.isPublished === true && (
             <div
               className="home-content"
-              key={blog._id}
               onClick={() => navigate(`/blog/${blog._id}`)}
             >
               <div className="home-profile">
@@ -51,27 +53,26 @@ const Home = () => {
               <h2>{truncate(blog.title, 120)}</h2>
               <p>{truncate(blog.story, 400)}</p>
               <div className="home-icons">
-                <FiHeart className="like" />
-                <FiBookmark className="bookmark" />
+                <div className="fn-icon">
+                  {blog.likes?.includes(user?.result?._id) ? (
+                    <FaHeart className="like liked" />
+                  ) : (
+                    <FiHeart className="like" />
+                  )}
+                  <p className="like-n">{blog.likes.length}</p>
+                </div>
+                {blog.savePost?.includes(user?.result?._id) ? (
+                  <FaBookmark className="bookmark" />
+                ) : (
+                  <BsBookmark className="bookmark" />
+                )}
               </div>
             </div>
           )}
-        </>
+        </div>
       ))}
     </div>
   );
 };
 
 export default Home;
-
-// {
-//   blog.story
-//     .split("\n\n")
-//     .map((paragraph) => (
-//       <p>
-//         {paragraph
-//           .split("\n")
-//           .map((line, index) => (index > 0 ? <span>{line}</span> : line))}
-//       </p>
-//     ));
-// }
