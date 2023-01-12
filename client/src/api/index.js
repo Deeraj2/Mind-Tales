@@ -51,8 +51,8 @@ export const unpublishBlog = (id, config) =>
 export const publishingBlog = (id, config) =>
   API.put("/blog/publishing", { id: id }, config);
 
-export const userBlog = (config) => API.get("/blog/userBlog", config);
-export const savedUserBlog = (config) => API.get("/blog/savedUserBlog", config);
+export const userBlog = (id) => API.get(`/blog/userBlog/${id}`);
+export const savedUserBlog = (id) => API.get(`/blog/savedUserBlog/${id}`);
 
 export const editBlog = (id, blog, config) =>
   API.put(`/blog/update/${id}`, blog, config);

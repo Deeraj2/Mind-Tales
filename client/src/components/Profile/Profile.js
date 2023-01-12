@@ -33,13 +33,8 @@ const Profile = () => {
   };
 
   const userBlog = async () => {
-    const config = {
-      headers: {
-        Authorization: `Bearer ${user?.token}`,
-      },
-    };
     try {
-      const { data } = await api.userBlog(config);
+      const { data } = await api.userBlog(id);
       setUserBlogs(data.reverse());
     } catch (error) {
       console.log(error);
@@ -47,13 +42,8 @@ const Profile = () => {
   };
 
   const savedUserBlogs = async () => {
-    const config = {
-      headers: {
-        Authorization: `Bearer ${user?.token}`,
-      },
-    };
     try {
-      const { data } = await api.savedUserBlog(config);
+      const { data } = await api.savedUserBlog(id);
       setSaved(data.reverse());
     } catch (error) {
       console.log(error);
@@ -69,8 +59,6 @@ const Profile = () => {
     userBlog();
     savedUserBlogs();
   }, [id]);
-
-  console.log(userBlogs);
 
   return (
     <div className="profile">

@@ -167,7 +167,7 @@
 .input-avatar{
     display: flex;
     align-self: flex-start;
-    margin-left: 15px;
+    margin-left: 10px;
 }
 .input-avatar > p{
     margin-top: 0.3rem;
@@ -209,9 +209,10 @@
     background-color: #9f95da !important;
     cursor: no-drop !important;
 }
-.cancel{
+.input-button > .cancel{
     background-color: #fff !important;
     color: gray !important;
+    border: none !important;
 }
 
 .comment-input > button:hover{
@@ -269,15 +270,27 @@
 .non-reply{
     display: none;
 }
-.reply-input > button{
+.reply-btn{
+    display: flex;
+    justify-content: end;
+    margin-right: 10px;
+}
+.reply-btn > button{
     width: 90px;
     margin: 10px 0;
     padding: 7px;
     border: none;
     border-radius: 10px;
-    background-color: #7c70c2;
     color: #dfdee5;
     cursor: pointer;
+}
+.Add{
+    background-color: #7c70c2;
+}
+.reply-cancel{
+    background-color: #fff !important;
+    color: gray !important;
+    margin-right: 10px !important;
 }
 .replyy{
     margin-left: 3rem;
@@ -326,4 +339,15 @@
 .modal__close {
     cursor: pointer;
     font-size: 18px;
+}
+@media (max-width: 600px) {
+    .comment-content{
+        width: 90%;
+    }
+    .non-comment{
+        width: 90%;
+    }
+    .comment-input{
+        width: 90%;
+    }
 }

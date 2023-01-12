@@ -5,12 +5,15 @@ import * as api from "../../api";
 import { Link } from "react-router-dom";
 
 function Paginate({ page }) {
-  const { publishedBlog, setPublishedBlog } = useContext(blogContext);
+  const { loading, setLoading, publishedBlog, setPublishedBlog } =
+    useContext(blogContext);
 
   const fetchBlogs = async () => {
     try {
+      setLoading(true);
       const { data } = await api.fetchPages(page);
       setPublishedBlog(data);
+      setLoading(false);
     } catch (error) {
       console.log(error);
     }

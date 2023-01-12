@@ -13,7 +13,7 @@ function useQuery() {
 }
 
 const Home = () => {
-  const { user, publishedBlog } = useContext(blogContext);
+  const { loading, setLoading, user, publishedBlog } = useContext(blogContext);
   const navigate = useNavigate();
   const query = useQuery();
   const page = query.get("page") || 1;

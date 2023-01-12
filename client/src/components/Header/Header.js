@@ -87,14 +87,44 @@ const Header = () => {
           </Avatar>
         </div>
       </div>
-      <div className="mobile-search">
-        <BsSearch className="search-icon" />
-        <input
-          type="text"
-          placeholder="Search"
-          value={search}
-          onChange={(e) => setSearch(e.target.value)}
-        />
+      <div className="mobile-profile">
+        <div className="mobile-search">
+          <BsSearch className="search-icon" />
+          <input
+            type="text"
+            placeholder="Search"
+            value={search}
+            onChange={(e) => setSearch(e.target.value)}
+          />
+        </div>
+        {search.length > 0 && (
+          <div className="mobileProfile">
+            {searchProfile?.map((p) => (
+              <div
+                key={p._id}
+                className="mobile-content"
+                onClick={() => handleNavigate(p._id)}
+              >
+                <Avatar
+                  src={p.pic}
+                  alt={p.name}
+                  sx={{
+                    color: "#7c70c2",
+                    cursor: "pointer",
+                    width: "46px",
+                    height: "46px",
+                  }}
+                >
+                  {p.name.charAt(0)}
+                </Avatar>
+                <div className="mobprofile">
+                  <p className="mobile-name">{p.name}</p>
+                  <p className="mobile-email">{p.email}</p>
+                </div>
+              </div>
+            ))}
+          </div>
+        )}
       </div>
     </>
   );

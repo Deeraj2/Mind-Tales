@@ -9,6 +9,7 @@ const BlogProvider = ({ children }) => {
   const [publishedBlog, setPublishedBlog] = useState([]);
   const [search, setSearch] = useState("");
   const [currentId, setCurrentId] = useState(null);
+  const [loading, setLoading] = useState(false);
 
   const searchQuery = () => {
     let blogs = publishedBlog.data;
@@ -40,6 +41,8 @@ const BlogProvider = ({ children }) => {
         searchQuery,
         currentId,
         setCurrentId,
+        loading,
+        setLoading,
       }}
     >
       {children}

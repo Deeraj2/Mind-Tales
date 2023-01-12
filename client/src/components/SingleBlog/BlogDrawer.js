@@ -231,7 +231,21 @@ export default function BlogDrawer({ singleBlog, setSingleBlog, id }) {
                           value={reply}
                           onChange={(e) => setReply(e.target.value)}
                         />
-                        <button onClick={() => replied(c._id)}>Reply</button>
+                        <div className="reply-btn">
+                          <button
+                            className="reply-cancel"
+                            onClick={() => setReplyExpand(false)}
+                          >
+                            Cancel
+                          </button>
+                          <button
+                            disabled={reply.length == 0}
+                            className={reply.length !== 0 ? "Add" : "disable"}
+                            onClick={() => replied(c._id)}
+                          >
+                            Reply
+                          </button>
+                        </div>
                       </div>
                     )}
                   </div>
