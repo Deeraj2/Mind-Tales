@@ -24,7 +24,7 @@ const Home = () => {
 
   return (
     <div className="home">
-      {publishedBlog?.data.map((blog) => (
+      {publishedBlog.data?.map((blog) => (
         <div key={blog._id}>
           {blog.isPublished === true && (
             <div

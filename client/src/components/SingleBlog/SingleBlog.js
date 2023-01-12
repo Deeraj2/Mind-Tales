@@ -97,7 +97,10 @@ const SingleBlog = () => {
   return (
     <div className="singlePost">
       <div className="singlepost-profile">
-        <div className="profile-info">
+        <div
+          className="profile-info"
+          onClick={() => navigate(`/profile/${singleBlog?.postedBy._id}`)}
+        >
           <Avatar
             sx={{ height: "48px", width: "48px" }}
             src={singleBlog?.postedBy.pic}

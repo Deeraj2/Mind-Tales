@@ -102,20 +102,22 @@ const Profile = () => {
           >
             Publish
           </button>
-          <button
-            type="button"
-            onClick={(e) => {
-              setText(e.target.textContent);
-              setActiveBtn("unpublish");
-            }}
-            className={`${
-              activeBtn === "unpublish"
-                ? "activeBtnStyles"
-                : "notActiveBtnStyles"
-            }`}
-          >
-            Unpublish
-          </button>
+          {user?.result._id === id && (
+            <button
+              type="button"
+              onClick={(e) => {
+                setText(e.target.textContent);
+                setActiveBtn("unpublish");
+              }}
+              className={`${
+                activeBtn === "unpublish"
+                  ? "activeBtnStyles"
+                  : "notActiveBtnStyles"
+              }`}
+            >
+              Unpublish
+            </button>
+          )}
           <button
             type="button"
             onClick={(e) => {
@@ -151,7 +153,7 @@ const Profile = () => {
                         </Avatar>
                         <p>{blog.postedBy.name}</p>
                       </div>
-                      <ProfileMenu text={text} />
+                      {user?.result._id === id && <ProfileMenu text={text} />}
                     </div>
                     <div className="userBlog-info">
                       <h2>{truncate(blog.title, 120)}</h2>
@@ -163,39 +165,43 @@ const Profile = () => {
             ))}
           </>
         )}
-        {text == "Unpublish" && (
+        {user?.result._id === id && (
           <>
-            {userBlogs?.map((blog) => (
-              <div key={blog._id}>
-                {blog.isPublished === false && (
-                  <div className="userBlog">
-                    <div className="userBlog-profile">
-                      <div className="profile-user">
-                        <Avatar
-                          src={blog.postedBy.pic}
-                          alt={blog.postedBy.name}
-                          sx={{ height: "40px", width: "40px" }}
-                        >
-                          {blog?.postedBy.name.charAt(0)}
-                        </Avatar>
-                        <p>{blog.postedBy.name}</p>
+            {text == "Unpublish" && (
+              <>
+                {userBlogs?.map((blog) => (
+                  <div key={blog._id}>
+                    {blog.isPublished === false && (
+                      <div className="userBlog">
+                        <div className="userBlog-profile">
+                          <div className="profile-user">
+                            <Avatar
+                              src={blog.postedBy.pic}
+                              alt={blog.postedBy.name}
+                              sx={{ height: "40px", width: "40px" }}
+                            >
+                              {blog?.postedBy.name.charAt(0)}
+                            </Avatar>
+                            <p>{blog.postedBy.name}</p>
+                          </div>
+                          <ProfileMenu
+                            text={text}
+                            userBlogs={userBlogs}
+                            setUserBlogs={setUserBlogs}
+                            id={blog._id}
+                            userBlog={userBlog}
+                          />
+                        </div>
+                        <div className="userBlog-info">
+                          <h2>{truncate(blog.title, 120)}</h2>
+                          <p>{truncate(blog.story, 400)}</p>
+                        </div>
                       </div>
-                      <ProfileMenu
-                        text={text}
-                        userBlogs={userBlogs}
-                        setUserBlogs={setUserBlogs}
-                        id={blog._id}
-                        userBlog={userBlog}
-                      />
-                    </div>
-                    <div className="userBlog-info">
-                      <h2>{truncate(blog.title, 120)}</h2>
-                      <p>{truncate(blog.story, 400)}</p>
-                    </div>
+                    )}
                   </div>
-                )}
-              </div>
-            ))}
+                ))}
+              </>
+            )}
           </>
         )}
         {text == "Saved" && (

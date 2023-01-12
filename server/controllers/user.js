@@ -54,9 +54,19 @@ export const userInfo = async (req, res) => {
   const { id } = req.params;
 
   try {
-    const user = await User.findById(id);
+    const user = await User.findById(id).select("-password");
     res.status(200).json(user);
   } catch (error) {
     res.status(404).json({ message: error });
   }
+};
+
+export const userProfile = async (req, res) => {
+  const name = req.body.name.trim();
+
+  let profile = await User.find({
+    name: { $regex: new RegExp("^" + name + ".*", "i") },
+  }).select("-password");
+  profile = profile.slice(0, 5);
+  res.status(200).json(profile);
 };

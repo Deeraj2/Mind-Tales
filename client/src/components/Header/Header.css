@@ -52,6 +52,39 @@
     display: none;
 }
 
+.searchProfile{
+    margin-top: 0.6rem;
+    border-radius: 15px;
+    width: 240px;
+    padding: 10px;
+    background-color: #d9d8e0;
+    position: absolute;
+}
+.search-content{
+    cursor: pointer;
+    padding: 10px;
+    display: flex;
+    align-items: center;
+    background-color: #dfdee5;
+    border-radius: 10px;
+    margin: 5px 0;
+    color: #333;
+    transition: 0.3s ease-in-out;
+}
+.search-content:hover{
+    color: #fff !important;
+    background-color: #7c70c2;
+}
+.search-profile{
+    margin-left: 10px;
+    font-weight: 600;
+}
+.search-name{
+    font-size: 1rem;
+}
+.search-email{
+    font-size: 0.7rem;
+}
 @media (max-width: 590px){
     .search{
         display: none;
