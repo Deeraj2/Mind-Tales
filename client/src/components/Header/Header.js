@@ -42,7 +42,7 @@ const Header = () => {
               <BsSearch className="search-icon" />
               <input
                 type="text"
-                placeholder="Search"
+                placeholder="Search Profile"
                 value={search}
                 onChange={(e) => setSearch(e.target.value)}
               />

@@ -35,14 +35,14 @@
     padding: 70px;
     margin-left: auto;
     margin-right: auto;
-    background-color: #fff;
+    background-color: #dfdee5;
     border-radius: 8px;
     display: grid;
     flex-direction: column;
 }
 .auth-login>input {
     margin-bottom: 14px;
-    background-color: whitesmoke;
+    background-color: #d9d8e0;
     outline-width: 0;
     height: 40px;
     padding: 5px 15px;
@@ -59,14 +59,17 @@
     font-family: 'Chillax', sans-serif;
     font-size: 35px;
     margin-bottom: 2rem;
-    color: #6977c5;
+    color: #333;
+}
+.name{
+    color: #7c70c2 !important;
 }
 
 .submit-btn {
     padding: 16px 20px;
     font-size: 1rem;
     color: #fff;
-    background-color: #6977c5;
+    background-color: #7c70c2;
     border: none;
     border-radius: 5px;
     cursor: pointer;
@@ -76,7 +79,7 @@
 }
 
 .submit-btn:hover {
-    background: #8390dd;
+    background-color: #7064b1;
 }
 
 
@@ -109,7 +112,7 @@
 }
 
 .switch-btn:hover {
-    color: lightgray;
+    color: #333;
     text-decoration: underline;
 }
 

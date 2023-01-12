@@ -85,7 +85,9 @@ const Auth = () => {
           onSubmit={handleSubmit}
           className={isSignUp ? "auth-login sign" : "auth-login"}
         >
-          <h1>MindTales</h1>
+          <h1>
+            Mind<span className="name">Tales</span>
+          </h1>
           <h2>{isSignUp ? "SignUp" : "SignIn"}</h2>
           {isSignUp && (
             <input
