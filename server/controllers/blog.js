@@ -2,11 +2,24 @@ import mongoose from "mongoose";
 import Blog from "../models/BlogModal.js";
 
 export const getBlogs = async (req, res) => {
+  const { page } = req.query;
   try {
-    const blog = await Blog.find().populate("postedBy", "-password");
-    res.status(200).json(blog);
+    const LIMIT = 6;
+    const startIndex = (Number(page) - 1) * LIMIT;
+    const total = await Blog.countDocuments({});
+    const blog = await Blog.find()
+      .populate("postedBy", "-password")
+      .sort({ _id: -1 })
+      .limit(LIMIT)
+      .skip(startIndex);
+
+    res.status(200).json({
+      data: blog,
+      currentPages: Number(page),
+      numberOfPage: Math.ceil(total / LIMIT),
+    });
   } catch (error) {
-    console.log(error);
+    res.status(404).json({ message: error.message });
   }
 };
 

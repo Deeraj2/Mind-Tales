@@ -11,7 +11,7 @@ const BlogProvider = ({ children }) => {
   const [currentId, setCurrentId] = useState(null);
 
   const searchQuery = () => {
-    let blogs = publishedBlog;
+    let blogs = publishedBlog.data;
     if (search) {
       blogs = blogs.filter(
         (item) =>

@@ -55,3 +55,7 @@
     cursor: pointer;
     z-index: 1;
 }
+.pagination{
+    display: flex;
+    justify-content: center;
+}

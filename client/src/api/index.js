@@ -10,6 +10,7 @@ export const userInfo = (id) => API.get(`/user/userInfo/${id}`);
 export const publishBlog = (blog, config) =>
   API.post("/blog/publish", blog, config);
 export const fetchBlogs = () => API.get("/blog");
+export const fetchPages = (page) => API.get(`/blog?page=${page}`);
 export const fetchSingleBlog = (id) => API.get(`/blog/singleBlog/${id}`);
 
 export const likeapost = (blogId, config) =>

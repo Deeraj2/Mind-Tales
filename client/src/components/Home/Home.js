@@ -1,39 +1,30 @@
-import React, { useContext, useEffect } from "react";
+import React, { useContext } from "react";
 import { blogContext } from "../../context/BlogProvider";
 import "./Home.css";
-import * as api from "../../api";
 import { Avatar } from "@mui/material";
 import { FiHeart } from "react-icons/fi";
 import { BsBookmark } from "react-icons/bs";
 import { FaHeart, FaBookmark } from "react-icons/fa";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
+import Paginate from "../Pagination/Paginate";
+
+function useQuery() {
+  return new URLSearchParams(useLocation().search);
+}
 
 const Home = () => {
-  const { publishedBlog, setPublishedBlog, user, searchQuery } =
-    useContext(blogContext);
+  const { user, publishedBlog } = useContext(blogContext);
   const navigate = useNavigate();
-
-  const fetchPublish = async () => {
-    try {
-      const { data } = await api.fetchBlogs();
-      const result = data.reverse();
-      setPublishedBlog(result);
-    } catch (error) {
-      console.log(error);
-    }
-  };
+  const query = useQuery();
+  const page = query.get("page") || 1;
 
   function truncate(string, n) {
     return string?.length > n ? string.substr(0, n - 1) + "..." : string;
   }
 
-  useEffect(() => {
-    fetchPublish();
-  }, []);
-
   return (
     <div className="home">
-      {searchQuery()?.map((blog) => (
+      {publishedBlog?.data.map((blog) => (
         <div key={blog._id}>
           {blog.isPublished === true && (
             <div
@@ -71,6 +62,10 @@ const Home = () => {
           )}
         </div>
       ))}
+
+      <div className="pagination">
+        <Paginate page={page} />
+      </div>
     </div>
   );
 };

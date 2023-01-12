@@ -1,5 +1,5 @@
 import React, { useContext } from "react";
-import { Route, Routes } from "react-router-dom";
+import { Navigate, Route, Routes } from "react-router-dom";
 import Home from "./components/Home/Home";
 import Auth from "./components/Auth/Auth";
 import Profile from "./components/Profile/Profile";
@@ -16,7 +16,8 @@ function App() {
         <>
           <Header />
           <Routes>
-            <Route path="/" element={<Home />} />
+            <Route path="/blogs" element={<Home />} />
+            <Route path="/" element={<Navigate replace to="/blogs" />} />
             <Route path="/profile/:id" element={<Profile />} />
             <Route path="/new-story" element={<Write />} />
             <Route path="/blog/:id" element={<SingleBlog />} />
