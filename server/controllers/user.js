@@ -66,7 +66,10 @@ export const userProfile = async (req, res) => {
 
   let profile = await User.find({
     name: { $regex: new RegExp("^" + name + ".*", "i") },
-  }).select("-password");
+    email: { $regex: new RegExp("^" + name + ".*", "i") },
+  })
+    .find({ _id: { $ne: req.user._id } })
+    .select("-password");
   profile = profile.slice(0, 5);
   res.status(200).json(profile);
 };
