@@ -23,8 +23,8 @@ import auth from "../middleware/auth.js";
 const route = express.Router();
 
 route.get("/", getBlogs);
-route.get("/userBlog", auth, getUserBlog);
-route.get("/savedUserBlog", auth, getUserSavedBlog);
+route.get("/userBlog/:id", getUserBlog);
+route.get("/savedUserBlog/:id", getUserSavedBlog);
 
 route.post("/publish", auth, publishPost);
 route.get("/singleBlog/:id", getBlog);

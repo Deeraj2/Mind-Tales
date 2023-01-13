@@ -24,8 +24,9 @@ export const getBlogs = async (req, res) => {
 };
 
 export const getUserBlog = async (req, res) => {
+  const { id } = req.params;
   try {
-    const blog = await Blog.find({ postedBy: req.user._id }).populate(
+    const blog = await Blog.find({ postedBy: id }).populate(
       "postedBy",
       "-password"
     );
@@ -36,9 +37,11 @@ export const getUserBlog = async (req, res) => {
 };
 
 export const getUserSavedBlog = async (req, res) => {
+  const { id } = req.params;
+
   try {
     const blog = await Blog.find({
-      savePost: { $all: [req.user._id] },
+      savePost: { $all: [id] },
     }).populate("postedBy", "-password");
     res.status(200).json(blog);
   } catch (error) {
