@@ -60,5 +60,5 @@ export const editBlog = (id, blog, config) =>
 export const deleteBlog = (id, config) =>
   API.delete(`/blog/delete/${id}`, config);
 
-export const searchProfile = (search) =>
-  API.post("/user/searchUser", { name: search });
+export const searchProfile = (search, config) =>
+  API.post("/user/searchUser", { name: search }, config);

@@ -196,7 +196,7 @@ export default function BlogDrawer({ singleBlog, setSingleBlog, id }) {
                         </div>
                       </div>
                     </div>
-                    {c.replies.map((r) => (
+                    {c.replies?.map((r) => (
                       <div className="comment-info replyy" key={r._id}>
                         <div className="profile-info">
                           <Avatar

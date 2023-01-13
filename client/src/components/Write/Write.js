@@ -33,7 +33,6 @@ const Write = () => {
         },
       };
       await api.publishBlog(blog, config);
-      // setPublishedBlog([data, ...publishedBlog]);
       clear();
       navigate("/");
     } catch (error) {

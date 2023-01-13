@@ -13,8 +13,13 @@ const Header = () => {
   const [searchProfile, setSearchProfile] = useState([]);
 
   const fetchSearchProfile = async () => {
+    const config = {
+      headers: {
+        Authorization: `Bearer ${user.token}`,
+      },
+    };
     try {
-      const { data } = await api.searchProfile(search);
+      const { data } = await api.searchProfile(search, config);
       setSearchProfile(data);
     } catch (error) {
       console.log(error);
@@ -48,27 +53,37 @@ const Header = () => {
               />
             </div>
             {search.length > 0 && (
-              <div className="searchProfile">
-                {searchProfile?.map((p) => (
-                  <div
-                    key={p._id}
-                    className="search-content"
-                    onClick={() => handleNavigate(p._id)}
-                  >
-                    <Avatar
-                      src={p.pic}
-                      alt={p.name}
-                      sx={{ color: "#7c70c2", cursor: "pointer" }}
-                    >
-                      {p.name.charAt(0)}
-                    </Avatar>
-                    <div className="search-profile">
-                      <p className="search-name">{p.name}</p>
-                      <p className="search-email">{p.email}</p>
-                    </div>
+              <>
+                {searchProfile?.length == 0 ? (
+                  <div className="searchProfile">
+                    <p className="notfound">User not found</p>
                   </div>
-                ))}
-              </div>
+                ) : (
+                  <>
+                    <div className="searchProfile">
+                      {searchProfile?.map((p) => (
+                        <div
+                          key={p._id}
+                          className="search-content"
+                          onClick={() => handleNavigate(p._id)}
+                        >
+                          <Avatar
+                            src={p.pic}
+                            alt={p.name}
+                            sx={{ color: "#7c70c2", cursor: "pointer" }}
+                          >
+                            {p.name.charAt(0)}
+                          </Avatar>
+                          <div className="search-profile">
+                            <p className="search-name">{p.name}</p>
+                            <p className="search-email">{p.email}</p>
+                          </div>
+                        </div>
+                      ))}
+                    </div>
+                  </>
+                )}
+              </>
             )}
           </div>
         </div>
@@ -98,32 +113,42 @@ const Header = () => {
           />
         </div>
         {search.length > 0 && (
-          <div className="mobileProfile">
-            {searchProfile?.map((p) => (
-              <div
-                key={p._id}
-                className="mobile-content"
-                onClick={() => handleNavigate(p._id)}
-              >
-                <Avatar
-                  src={p.pic}
-                  alt={p.name}
-                  sx={{
-                    color: "#7c70c2",
-                    cursor: "pointer",
-                    width: "46px",
-                    height: "46px",
-                  }}
-                >
-                  {p.name.charAt(0)}
-                </Avatar>
-                <div className="mobprofile">
-                  <p className="mobile-name">{p.name}</p>
-                  <p className="mobile-email">{p.email}</p>
-                </div>
+          <>
+            {searchProfile.length == 0 ? (
+              <div className="mobileProfile">
+                <p className="notfound">User not found</p>
               </div>
-            ))}
-          </div>
+            ) : (
+              <>
+                <div className="mobileProfile">
+                  {searchProfile?.map((p) => (
+                    <div
+                      key={p._id}
+                      className="mobile-content"
+                      onClick={() => handleNavigate(p._id)}
+                    >
+                      <Avatar
+                        src={p.pic}
+                        alt={p.name}
+                        sx={{
+                          color: "#7c70c2",
+                          cursor: "pointer",
+                          width: "46px",
+                          height: "46px",
+                        }}
+                      >
+                        {p.name.charAt(0)}
+                      </Avatar>
+                      <div className="mobprofile">
+                        <p className="mobile-name">{p.name}</p>
+                        <p className="mobile-email">{p.email}</p>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </>
+            )}
+          </>
         )}
       </div>
     </>

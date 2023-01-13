@@ -4,16 +4,15 @@ import { PaginationItem, Pagination } from "@mui/material";
 import * as api from "../../api";
 import { Link } from "react-router-dom";
 
-function Paginate({ page }) {
-  const { loading, setLoading, publishedBlog, setPublishedBlog } =
-    useContext(blogContext);
+function Paginate({ page, setisLoading, isLoading }) {
+  const { publishedBlog, setPublishedBlog } = useContext(blogContext);
 
   const fetchBlogs = async () => {
     try {
-      setLoading(true);
+      setisLoading(true);
       const { data } = await api.fetchPages(page);
       setPublishedBlog(data);
-      setLoading(false);
+      setisLoading(false);
     } catch (error) {
       console.log(error);
     }

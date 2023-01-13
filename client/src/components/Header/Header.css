@@ -53,12 +53,13 @@
 }
 
 .searchProfile{
-    margin-top: 0.6rem;
+    margin-top: 0.5rem;
     border-radius: 15px;
     width: 240px;
     padding: 10px;
     background-color: #d9d8e0;
     position: absolute;
+    z-index: 1;
     box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
 }
 .search-content{
@@ -70,6 +71,7 @@
     border-radius: 10px;
     margin: 5px 0;
     color: #333;
+    
     transition: 0.3s ease-in-out;
 }
 .search-content:hover{
@@ -85,6 +87,13 @@
 }
 .search-email{
     font-size: 0.7rem;
+}
+.notfound{
+    padding: 15px 0;
+    margin-right: 10px;
+    text-align: center;
+    font-weight: 600;
+    color: gray;
 }
 @media (max-width: 590px){
     .Profile{

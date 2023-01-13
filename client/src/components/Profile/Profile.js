@@ -54,6 +54,14 @@ const Profile = () => {
     return string?.length > n ? string.substr(0, n - 1) + "..." : string;
   }
 
+  const unPublished = userBlogs?.filter((b) => {
+    return b.isPublished === false;
+  });
+
+  const published = userBlogs?.filter((b) => {
+    return b.isPublished === true;
+  });
+
   useEffect(() => {
     fetchProfile();
     userBlog();
@@ -72,9 +80,11 @@ const Profile = () => {
         </Avatar>
         <h2>{profile?.name}</h2>
         <p>{profile?.email}</p>
-        <button onClick={logout} className="logout">
-          Logout
-        </button>
+        {user.result?._id == profile?._id && (
+          <button onClick={logout} className="logout">
+            Logout
+          </button>
+        )}
       </div>
       <div className="user-content">
         <div className="user-title">
@@ -121,46 +131,102 @@ const Profile = () => {
         </div>
         {text == "Publish" && (
           <>
-            {userBlogs?.map((blog) => (
-              <div key={blog._id}>
-                {blog.isPublished === true && (
-                  <div
-                    className="userBlog"
-                    onClick={() => {
-                      navigate(`/blog/${blog._id}`);
-                    }}
-                  >
-                    <div className="userBlog-profile">
-                      <div className="profile-user">
-                        <Avatar
-                          src={blog.postedBy.pic}
-                          alt={blog.postedBy.name}
-                          sx={{ height: "40px", width: "40px" }}
-                        >
-                          {blog?.postedBy.name.charAt(0)}
-                        </Avatar>
-                        <p>{blog.postedBy.name}</p>
+            {published.length > 0 ? (
+              <>
+                {published?.map((blog) => (
+                  <div key={blog._id}>
+                    <div
+                      className="userBlog"
+                      onClick={() => {
+                        navigate(`/blog/${blog._id}`);
+                      }}
+                    >
+                      <div className="userBlog-profile">
+                        <div className="profile-user">
+                          <Avatar
+                            src={blog.postedBy.pic}
+                            alt={blog.postedBy.name}
+                            sx={{ height: "40px", width: "40px" }}
+                          >
+                            {blog?.postedBy.name.charAt(0)}
+                          </Avatar>
+                          <p>{blog.postedBy.name}</p>
+                        </div>
+                        {user?.result._id === id && <ProfileMenu text={text} />}
                       </div>
-                      {user?.result._id === id && <ProfileMenu text={text} />}
-                    </div>
-                    <div className="userBlog-info">
-                      <h2>{truncate(blog.title, 120)}</h2>
-                      <p>{truncate(blog.story, 400)}</p>
+                      <div className="userBlog-info">
+                        <h2>{truncate(blog.title, 120)}</h2>
+                        <p>{truncate(blog.story, 400)}</p>
+                      </div>
                     </div>
                   </div>
-                )}
+                ))}
+              </>
+            ) : (
+              <div className="no-blog">
+                <p>Haven't published Blogs</p>
               </div>
-            ))}
+            )}
           </>
         )}
         {user?.result._id === id && (
           <>
             {text == "Unpublish" && (
               <>
-                {userBlogs?.map((blog) => (
+                {unPublished.length > 0 ? (
+                  <>
+                    {unPublished.map((blog) => (
+                      <div key={blog._id}>
+                        <div className="userBlog">
+                          <div className="userBlog-profile">
+                            <div className="profile-user">
+                              <Avatar
+                                src={blog.postedBy.pic}
+                                alt={blog.postedBy.name}
+                                sx={{ height: "40px", width: "40px" }}
+                              >
+                                {blog?.postedBy.name.charAt(0)}
+                              </Avatar>
+                              <p>{blog.postedBy.name}</p>
+                            </div>
+                            <ProfileMenu
+                              text={text}
+                              userBlogs={userBlogs}
+                              setUserBlogs={setUserBlogs}
+                              id={blog._id}
+                              userBlog={userBlog}
+                            />
+                          </div>
+                          <div className="userBlog-info">
+                            <h2>{truncate(blog.title, 120)}</h2>
+                            <p>{truncate(blog.story, 400)}</p>
+                          </div>
+                        </div>
+                      </div>
+                    ))}
+                  </>
+                ) : (
+                  <div className="no-blog">
+                    <p>Everything is published</p>
+                  </div>
+                )}
+              </>
+            )}
+          </>
+        )}
+        {text == "Saved" && (
+          <>
+            {saved.length > 0 ? (
+              <>
+                {saved?.map((blog) => (
                   <div key={blog._id}>
-                    {blog.isPublished === false && (
-                      <div className="userBlog">
+                    {blog.isPublished === true && (
+                      <div
+                        className="userBlog"
+                        onClick={() => {
+                          navigate(`/blog/${blog._id}`);
+                        }}
+                      >
                         <div className="userBlog-profile">
                           <div className="profile-user">
                             <Avatar
@@ -172,13 +238,6 @@ const Profile = () => {
                             </Avatar>
                             <p>{blog.postedBy.name}</p>
                           </div>
-                          <ProfileMenu
-                            text={text}
-                            userBlogs={userBlogs}
-                            setUserBlogs={setUserBlogs}
-                            id={blog._id}
-                            userBlog={userBlog}
-                          />
                         </div>
                         <div className="userBlog-info">
                           <h2>{truncate(blog.title, 120)}</h2>
@@ -189,40 +248,11 @@ const Profile = () => {
                   </div>
                 ))}
               </>
-            )}
-          </>
-        )}
-        {text == "Saved" && (
-          <>
-            {saved?.map((blog) => (
-              <div key={blog._id}>
-                {blog.isPublished === true && (
-                  <div
-                    className="userBlog"
-                    onClick={() => {
-                      navigate(`/blog/${blog._id}`);
-                    }}
-                  >
-                    <div className="userBlog-profile">
-                      <div className="profile-user">
-                        <Avatar
-                          src={blog.postedBy.pic}
-                          alt={blog.postedBy.name}
-                          sx={{ height: "40px", width: "40px" }}
-                        >
-                          {blog?.postedBy.name.charAt(0)}
-                        </Avatar>
-                        <p>{blog.postedBy.name}</p>
-                      </div>
-                    </div>
-                    <div className="userBlog-info">
-                      <h2>{truncate(blog.title, 120)}</h2>
-                      <p>{truncate(blog.story, 400)}</p>
-                    </div>
-                  </div>
-                )}
+            ) : (
+              <div className="no-blog">
+                <p>There is no saved blog</p>
               </div>
-            ))}
+            )}
           </>
         )}
       </div>
