@@ -8,6 +8,6 @@ route.post("/signup", signUp);
 route.post("/signin", signIn);
 
 route.get("/userInfo/:id", userInfo);
-route.post("/searchUser/:id", userProfile);
+route.post("/searchUser", userProfile);
 
 export default route;
