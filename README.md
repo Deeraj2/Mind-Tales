@@ -39,7 +39,7 @@ Rest API:
     * Blog: Blog route handles all CRUD, like, save and comment opeartion related to the blog.
 
 ### Front-End:
-  *Front-end is fully developed in ReactJS using npx create-react-app boilerplate.
+  * Front-end is fully developed in ReactJS using npx create-react-app boilerplate.
   
 ## Made Using:
 * **[ReactJS](https://reactjs.org/docs/getting-started.html)**
