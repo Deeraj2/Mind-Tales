@@ -61,4 +61,4 @@ export const deleteBlog = (id, config) =>
   API.delete(`/blog/delete/${id}`, config);
 
 export const searchProfile = (search, config) =>
-  API.post("/user/searchUser", { name: search }, config);
+  API.get(`/user?search=${search}`, config);

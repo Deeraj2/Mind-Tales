@@ -18,7 +18,7 @@ const Write = () => {
   const navigate = useNavigate();
 
   const blogs = currentId
-    ? publishedBlog.find((blog) => blog._id === currentId)
+    ? publishedBlog.data?.find((blog) => blog._id === currentId)
     : null;
 
   const handleCreate = async () => {
@@ -66,8 +66,6 @@ const Write = () => {
   useEffect(() => {
     if (blogs) setBlog(blogs);
   }, [blogs]);
-
-  console.log(currentId);
 
   return (
     <div className="write">

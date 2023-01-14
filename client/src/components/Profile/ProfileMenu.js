@@ -28,8 +28,7 @@ export default function ProfileMenu({ text, id }) {
       },
     };
     try {
-      const { data } = await api.publishingBlog(id, config);
-      console.log(data);
+      await api.publishingBlog(id, config);
       navigate("/");
       handleClose();
     } catch (error) {
