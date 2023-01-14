@@ -62,12 +62,20 @@ export const userInfo = async (req, res) => {
 };
 
 export const userProfile = async (req, res) => {
-  const name = req.body.name.trim();
+  const keyword = req.query.search
+    ? {
+        $or: [
+          {
+            name: { $regex: req.query.search, $options: "i" },
+          },
+          {
+            email: { $regex: req.query.search, $options: "i" },
+          },
+        ],
+      }
+    : {};
 
-  let profile = await User.find({
-    name: { $regex: new RegExp("^" + name + ".*", "i") },
-    email: { $regex: new RegExp("^" + name + ".*", "i") },
-  })
+  let profile = await User.find(keyword)
     .find({ _id: { $ne: req.user._id } })
     .select("-password");
   profile = profile.slice(0, 5);

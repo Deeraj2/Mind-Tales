@@ -95,6 +95,7 @@ export const like = async (req, res) => {
         new: true,
       }
     )
+      .populate("comments.replies.commentedBy", "-password")
       .populate("comments.commentedBy", "-password")
       .populate("postedBy", "-password");
     res.status(200).json(like);
@@ -113,6 +114,7 @@ export const unlike = async (req, res) => {
       },
       { new: true }
     )
+      .populate("comments.replies.commentedBy", "-password")
       .populate("comments.commentedBy", "-password")
       .populate("postedBy", "-password");
     res.status(200).json(unlike);
@@ -134,6 +136,7 @@ export const save = async (req, res) => {
         new: true,
       }
     )
+      .populate("comments.replies.commentedBy", "-password")
       .populate("comments.commentedBy", "-password")
       .populate("postedBy", "-password");
     res.status(200).json(like);
@@ -152,6 +155,7 @@ export const unsave = async (req, res) => {
       },
       { new: true }
     )
+      .populate("comments.replies.commentedBy", "-password")
       .populate("comments.commentedBy", "-password")
       .populate("postedBy", "-password");
     res.status(200).json(unlike);
@@ -297,7 +301,10 @@ export const updateBlog = async (req, res) => {
     return res.status(404).send(`No post with this ${id}`);
   // const updateblog = { title, story, _id: id };
 
-  await Blog.findByIdAndUpdate(id, { ...blog, _id: id }, { new: true });
+  await Blog.findByIdAndUpdate(id, { ...blog, _id: id }, { new: true })
+    .populate("comments.replies.commentedBy", "-password")
+    .populate("comments.commentedBy", "-password")
+    .populate("postedBy", "-password");
 
   res.json("Updated");
 };
