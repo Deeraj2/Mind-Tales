@@ -19,7 +19,8 @@ export default function BlogMenu({ id }) {
     event.stopPropagation();
     setAnchorEl(event.currentTarget);
   };
-  const handleClose = () => {
+  const handleClose = (event) => {
+    event.stopPropagation();
     setAnchorEl(null);
   };
 

@@ -5,6 +5,7 @@ import { Avatar } from "@mui/material";
 import "./Profile.css";
 import { blogContext } from "../../context/BlogProvider";
 import ProfileMenu from "./ProfileMenu";
+import LogoutModal from "./LogoutModal";
 
 const Profile = () => {
   const { id } = useParams();
@@ -24,12 +25,6 @@ const Profile = () => {
     } catch (error) {
       console.log(error);
     }
-  };
-
-  const logout = () => {
-    localStorage.clear();
-    setUser(null);
-    navigate("/auth");
   };
 
   const userBlog = async () => {
@@ -80,11 +75,7 @@ const Profile = () => {
         </Avatar>
         <h2>{profile?.name}</h2>
         <p>{profile?.email}</p>
-        {user.result?._id == profile?._id && (
-          <button onClick={logout} className="logout">
-            Logout
-          </button>
-        )}
+        {user.result?._id == profile?._id && <LogoutModal />}
       </div>
       <div className="user-content">
         <div className="user-title">
@@ -152,7 +143,6 @@ const Profile = () => {
                           </Avatar>
                           <p>{blog.postedBy.name}</p>
                         </div>
-                        {user?.result._id === id && <ProfileMenu text={text} />}
                       </div>
                       <div className="userBlog-info">
                         <h2>{truncate(blog.title, 120)}</h2>
@@ -189,13 +179,7 @@ const Profile = () => {
                               </Avatar>
                               <p>{blog.postedBy.name}</p>
                             </div>
-                            <ProfileMenu
-                              text={text}
-                              userBlogs={userBlogs}
-                              setUserBlogs={setUserBlogs}
-                              id={blog._id}
-                              userBlog={userBlog}
-                            />
+                            <ProfileMenu text={text} id={blog._id} />
                           </div>
                           <div className="userBlog-info">
                             <h2>{truncate(blog.title, 120)}</h2>

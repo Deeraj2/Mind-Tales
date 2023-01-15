@@ -9,15 +9,17 @@ import { useNavigate } from "react-router-dom";
 
 export default function ProfileMenu({ text, id }) {
   const [anchorEl, setAnchorEl] = React.useState(null);
-  const { user } = useContext(blogContext);
+  const { user, setCurrentId } = useContext(blogContext);
   const navigate = useNavigate();
 
   const open = Boolean(anchorEl);
+
   const handleClick = (event) => {
     event.stopPropagation();
     setAnchorEl(event.currentTarget);
   };
-  const handleClose = () => {
+  const handleClose = (event) => {
+    event.stopPropagation();
     setAnchorEl(null);
   };
 
@@ -41,6 +43,7 @@ export default function ProfileMenu({ text, id }) {
       <Button
         sx={{
           color: "#333",
+          zIndex: "1",
         }}
         aria-controls={open ? "basic-menu" : undefined}
         aria-haspopup="true"
@@ -61,7 +64,6 @@ export default function ProfileMenu({ text, id }) {
           "aria-labelledby": "basic-button",
         }}
       >
-        <MenuItem onClick={handleClose}>Edit</MenuItem>
         {text === "Unpublish" && (
           <MenuItem onClick={() => handlePublish(id)}>Publish</MenuItem>
         )}

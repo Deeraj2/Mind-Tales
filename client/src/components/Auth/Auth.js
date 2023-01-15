@@ -126,7 +126,7 @@ const Auth = () => {
             />
           )}
           <button type="submit" className="submit-btn">
-            Sign Up
+            {isSignUp ? "Sign Up" : "Sign In"}
           </button>
           <h4 className="switch-btn" onClick={() => setisSignUp(!isSignUp)}>
             {isSignUp

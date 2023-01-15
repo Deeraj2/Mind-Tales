@@ -168,87 +168,92 @@ export default function BlogDrawer({ singleBlog, setSingleBlog, id }) {
               </div>
               <div className="comment-content">
                 {singleBlog?.comments.map((c) => (
-                  <div key={c._id}>
-                    <div className="comment-info">
-                      <div className="profile-info">
-                        <Avatar
-                          src={c.commentedBy?.pic}
-                          alt={c.commentedBy?.name}
-                          sx={{ width: "40px", height: "40px" }}
-                        >
-                          {c.commentedBy?.name.charAt(0)}
-                        </Avatar>
-                        <div className="profile-name">
-                          <div className="comment-delete">
-                            <p className="pic-name">{c.commentedBy?.name}</p>
-                            {c.commentedBy?._id === user?.result._id && (
-                              <MdOutlineDelete
-                                className="delete"
-                                onClick={() => deleteComment(c._id)}
-                              />
-                            )}
-                            <MdReply
-                              className="reply"
-                              onClick={() => replyEpanding(c._id)}
-                            />
-                          </div>
-                          <p className="names">{c.text}</p>
-                        </div>
-                      </div>
-                    </div>
-                    {c.replies?.map((r) => (
-                      <div className="comment-info replyy" key={r._id}>
-                        <div className="profile-info">
+                  <>
+                    <div key={c._id}>
+                      <div className="comment-info">
+                        <div className="profile-info profile-comment">
                           <Avatar
-                            src={r.commentedBy?.pic}
-                            alt={r.commentedBy?.name}
+                            src={c.commentedBy?.pic}
+                            alt={c.commentedBy?.name}
                             sx={{ width: "40px", height: "40px" }}
                           >
-                            {r.commentedBy?.name?.charAt(0)}
+                            {c.commentedBy?.name.charAt(0)}
                           </Avatar>
                           <div className="profile-name">
                             <div className="comment-delete">
-                              <p className="pic-name">{r.commentedBy?.name}</p>
-                              {r.commentedBy?._id === user?.result._id && (
+                              <p className="pic-name">{c.commentedBy?.name}</p>
+                              {c.commentedBy?._id === user?.result._id && (
                                 <MdOutlineDelete
                                   className="delete"
-                                  onClick={() => deleteReply(r._id)}
+                                  onClick={() => deleteComment(c._id)}
                                 />
                               )}
+                              <MdReply
+                                className="reply"
+                                onClick={() => replyEpanding(c._id)}
+                              />
                             </div>
-                            <p className="names">{r.text}</p>
+                            <p className="names">{c.text}</p>
                           </div>
                         </div>
                       </div>
-                    ))}
-                    {c._id === currentId && (
-                      <div
-                        className={replyExpand ? "reply-input" : "non-reply"}
-                      >
-                        <textarea
-                          className="reply-text"
-                          placeholder={`Reply to ${c.commentedBy?.name}`}
-                          value={reply}
-                          onChange={(e) => setReply(e.target.value)}
-                        />
-                        <div className="reply-btn">
-                          <button
-                            className="reply-cancel"
-                            onClick={() => setReplyExpand(false)}
-                          >
-                            Cancel
-                          </button>
-                          <button
-                            disabled={reply.length == 0}
-                            className={reply.length !== 0 ? "Add" : "disable"}
-                            onClick={() => replied(c._id)}
-                          >
-                            Reply
-                          </button>
+                      {c.replies?.map((r) => (
+                        <div className="replyy" key={r._id}>
+                          <div className="profile-info">
+                            <Avatar
+                              src={r.commentedBy?.pic}
+                              alt={r.commentedBy?.name}
+                              sx={{ width: "40px", height: "40px" }}
+                            >
+                              {r.commentedBy?.name?.charAt(0)}
+                            </Avatar>
+                            <div className="profile-name">
+                              <div className="comment-delete">
+                                <p className="pic-name">
+                                  {r.commentedBy?.name}
+                                </p>
+                                {r.commentedBy?._id === user?.result._id && (
+                                  <MdOutlineDelete
+                                    className="delete"
+                                    onClick={() => deleteReply(r._id)}
+                                  />
+                                )}
+                              </div>
+                              <p className="names">{r.text}</p>
+                            </div>
+                          </div>
                         </div>
-                      </div>
-                    )}
-                  </div>
+                      ))}
+                      {c._id === currentId && (
+                        <div
+                          className={replyExpand ? "reply-input" : "non-reply"}
+                        >
+                          <textarea
+                            className="reply-text"
+                            placeholder={`Reply to ${c.commentedBy?.name}`}
+                            value={reply}
+                            onChange={(e) => setReply(e.target.value)}
+                          />
+                          <div className="reply-btn">
+                            <button
+                              className="reply-cancel"
+                              onClick={() => setReplyExpand(false)}
+                            >
+                              Cancel
+                            </button>
+                            <button
+                              disabled={reply.length == 0}
+                              className={reply.length !== 0 ? "Add" : "disable"}
+                              onClick={() => replied(c._id)}
+                            >
+                              Reply
+                            </button>
+                          </div>
+                        </div>
+                      )}
+                    </div>
+                    <div className="vl" />
+                  </>
                 ))}
               </div>
             </div>

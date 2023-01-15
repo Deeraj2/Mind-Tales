@@ -120,9 +120,12 @@
 }
 .comment-content{
     width: 50%;
-    height: 500px;
+    height: 650px;
     overflow-y: scroll;
     margin: 10px auto;
+}
+.profile-comment{
+    margin-bottom: 10px;
 }
 .comment-input{
     background-color: #d9d8e0;
@@ -227,7 +230,7 @@
     font-weight: 600;
 }
 .comment-info{
-    margin: 20px;
+    margin: 5px 10px ;
 }
 .names{
     font-size: 15px;
@@ -293,7 +296,12 @@
     margin-right: 10px !important;
 }
 .replyy{
-    margin-left: 3rem;
+    position: relative;
+    top: -2px;
+    margin-left: 1.8rem;
+    border-left: 1px solid rgb(194, 192, 192);
+    padding: 10px;
+    padding-left: 20px !important;
 }
 .unpublish{
     color: #333;
