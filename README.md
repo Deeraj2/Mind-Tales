@@ -1,7 +1,7 @@
 # Mind-Tales
 
 ![Mind-Tales image](https://res.cloudinary.com/dwxmraluj/image/upload/v1673680945/Mind-Tales_vg19wx.png)
-MindTales is a blog app where expert and undiscover voices write their thoughts, ideas, story etc. ser can publish or unpubish the blog and like, comment, save, delete and view the other user profile. mplemented the entire login system to allow CRUD operation on the user blog.
+MindTales is a blog app where expert and undiscover voices write their thoughts, ideas, story etc. User can publish or unpubish the blog and like, comment, save, delete and view the other user profile. Implemented the entire login system to allow CRUD operation on the user blog.
 
 ## Installation
 
