@@ -7,12 +7,30 @@ import { useNavigate } from "react-router-dom";
 import { blogContext } from "../../context/BlogProvider";
 import * as api from "../../api";
 
+//Debounce
+const Debouncing = (value, delay = 500) => {
+  const [debounceValue, setDebounceValue] = useState(value);
+
+  useEffect(() => {
+    const timeout = setTimeout(() => {
+      setDebounceValue(value);
+    }, delay);
+
+    //cleaning
+    return () => clearTimeout(timeout);
+  }, [value]);
+
+  return debounceValue;
+};
+
 const Header = () => {
   const { user, search, setSearch } = useContext(blogContext);
   const navigate = useNavigate();
   const [searchProfile, setSearchProfile] = useState([]);
 
-  const fetchSearchProfile = async () => {
+  const debounceQuery = Debouncing(search);
+
+  const fetchSearchProfile = async (search) => {
     const config = {
       headers: {
         Authorization: `Bearer ${user.token}`,
@@ -32,8 +50,23 @@ const Header = () => {
   };
 
   useEffect(() => {
-    if (search) fetchSearchProfile();
-  }, [search]);
+    let ignore = false;
+
+    //IIFE
+    (async () => {
+      setSearchProfile([]);
+      if (debounceQuery.length > 0) {
+        if (!ignore) {
+          await fetchSearchProfile(debounceQuery);
+        }
+      }
+    })();
+
+    //Cleaning method
+    return () => {
+      ignore = true;
+    };
+  }, [debounceQuery]);
 
   return (
     <>
@@ -52,7 +85,7 @@ const Header = () => {
                 onChange={(e) => setSearch(e.target.value)}
               />
             </div>
-            {search.length > 0 && (
+            {debounceQuery.length > 0 && (
               <>
                 {searchProfile?.length == 0 ? (
                   <div className="searchProfile">
@@ -112,7 +145,7 @@ const Header = () => {
             onChange={(e) => setSearch(e.target.value)}
           />
         </div>
-        {search.length > 0 && (
+        {debounceQuery.length > 0 && (
           <>
             {searchProfile.length == 0 ? (
               <div className="mobileProfile">
