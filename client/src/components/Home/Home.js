@@ -7,6 +7,7 @@ import { BsBookmark } from "react-icons/bs";
 import { FaHeart, FaBookmark } from "react-icons/fa";
 import { useNavigate, useLocation } from "react-router-dom";
 import Paginate from "../Pagination/Paginate";
+import Loading from "../Loading/Loading";
 
 function useQuery() {
   return new URLSearchParams(useLocation().search);
@@ -25,8 +26,8 @@ const Home = () => {
 
   return (
     <div className="home">
-      {isLoading ? (
-        <CircularProgress color="primary" determinate={false} size="lg" />
+      {publishedBlog.length == 0 ? (
+        <Loading />
       ) : (
         <>
           {publishedBlog.data?.map((blog) => (

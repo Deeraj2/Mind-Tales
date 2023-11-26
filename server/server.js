@@ -16,10 +16,15 @@ app.use(cors());
 
 mongoose.set("strictQuery", true);
 
-mongoose.connect(process.env.MONGODB_CONNECTION_URL, {
-  useNewUrlParser: true,
-  useUnifiedTopology: true,
-});
+mongoose
+  .connect(process.env.MONGODB_CONNECTION_URL, {
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+  })
+  .then(() => {
+    console.log("Database Connected");
+  })
+  .catch((e) => console.log("Error" + e));
 
 app.use("/user", userRoutes);
 app.use("/blog", blogRoutes);

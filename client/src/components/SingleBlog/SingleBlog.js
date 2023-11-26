@@ -12,6 +12,7 @@ import { blogContext } from "../../context/BlogProvider";
 import BlogDrawer from "./BlogDrawer";
 import UnpublishModal from "./UnpublishModal";
 import BlogMenu from "./BlogMenu";
+import Loading from "../Loading/Loading";
 
 const SingleBlog = () => {
   const { id } = useParams();
@@ -95,73 +96,81 @@ const SingleBlog = () => {
   }, [id]);
 
   return (
-    <div className="singlePost">
-      <div className="singlepost-profile">
-        <div
-          className="profile-info"
-          onClick={() => navigate(`/profile/${singleBlog?.postedBy._id}`)}
-        >
-          <Avatar
-            sx={{ height: "48px", width: "48px" }}
-            src={singleBlog?.postedBy.pic}
-            alt={singleBlog?.postedBy.name}
-          >
-            {singleBlog?.postedBy?.name?.charAt(0)}
-          </Avatar>
-          <h3>{singleBlog?.postedBy.name}</h3>
+    <>
+      {singleBlog == undefined ? (
+        <Loading />
+      ) : (
+        <div className="singlePost">
+          <div className="singlepost-profile">
+            <div
+              className="profile-info"
+              onClick={() => navigate(`/profile/${singleBlog?.postedBy._id}`)}
+            >
+              <Avatar
+                sx={{ height: "48px", width: "48px" }}
+                src={singleBlog?.postedBy.pic}
+                alt={singleBlog?.postedBy.name}
+              >
+                {singleBlog?.postedBy?.name?.charAt(0)}
+              </Avatar>
+              <h3>{singleBlog?.postedBy.name}</h3>
+            </div>
+            <div className="profile-icons">
+              <a href={`mailto:${singleBlog?.postedBy.email}`}>
+                <IoMailOutline className="email" />
+              </a>
+              {singleBlog?.savePost?.includes(user?.result?._id) ? (
+                <FaBookmark
+                  className="save saved"
+                  onClick={() => unsaveABlog(singleBlog?._id)}
+                />
+              ) : (
+                <BsBookmark
+                  className="save"
+                  onClick={() => saveaBlog(singleBlog?._id)}
+                />
+              )}
+              {singleBlog?.postedBy._id === user?.result._id && (
+                <BlogMenu id={id} />
+              )}
+            </div>
+          </div>
+          <div className="singlepost-content">
+            <h2>{singleBlog?.title}</h2>
+            {singleBlog?.story.split("\n\n").map((paragraph, idx) => (
+              <p key={idx} className="story-para">
+                {paragraph
+                  .split("\n")
+                  .map((line, index) =>
+                    index > 0 ? <span>{line}</span> : line
+                  )}
+              </p>
+            ))}
+          </div>
+          <div className="singlepost-function">
+            <div className="fn-icon">
+              {singleBlog?.likes.includes(user?.result?._id) ? (
+                <FaHeart
+                  className="post-heart liked"
+                  onClick={() => unlikeABlog(singleBlog?._id)}
+                />
+              ) : (
+                <FiHeart
+                  className="post-heart"
+                  onClick={() => likeABlog(singleBlog?._id)}
+                />
+              )}
+              <p>{singleBlog?.likes.length}</p>
+            </div>
+            <BlogDrawer
+              id={id}
+              singleBlog={singleBlog}
+              setSingleBlog={setSingleBlog}
+            />
+          </div>
         </div>
-        <div className="profile-icons">
-          <a href={`mailto:${singleBlog?.postedBy.email}`}>
-            <IoMailOutline className="email" />
-          </a>
-          {singleBlog?.savePost?.includes(user?.result?._id) ? (
-            <FaBookmark
-              className="save saved"
-              onClick={() => unsaveABlog(singleBlog?._id)}
-            />
-          ) : (
-            <BsBookmark
-              className="save"
-              onClick={() => saveaBlog(singleBlog?._id)}
-            />
-          )}
-          {singleBlog?.postedBy._id === user?.result._id && (
-            <BlogMenu id={id} />
-          )}
-        </div>
-      </div>
-      <div className="singlepost-content">
-        <h2>{singleBlog?.title}</h2>
-        {singleBlog?.story.split("\n\n").map((paragraph, idx) => (
-          <p key={idx} className="story-para">
-            {paragraph
-              .split("\n")
-              .map((line, index) => (index > 0 ? <span>{line}</span> : line))}
-          </p>
-        ))}
-      </div>
-      <div className="singlepost-function">
-        <div className="fn-icon">
-          {singleBlog?.likes.includes(user?.result?._id) ? (
-            <FaHeart
-              className="post-heart liked"
-              onClick={() => unlikeABlog(singleBlog?._id)}
-            />
-          ) : (
-            <FiHeart
-              className="post-heart"
-              onClick={() => likeABlog(singleBlog?._id)}
-            />
-          )}
-          <p>{singleBlog?.likes.length}</p>
-        </div>
-        <BlogDrawer
-          id={id}
-          singleBlog={singleBlog}
-          setSingleBlog={setSingleBlog}
-        />
-      </div>
-    </div>
+      )}
+    </>
   );
 };
 

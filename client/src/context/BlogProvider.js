@@ -21,11 +21,14 @@ const BlogProvider = ({ children }) => {
     return blogs;
   };
 
+  console.log(publishedBlog);
   useEffect(() => {
     const userInfo = JSON.parse(localStorage.getItem("profileDetail"));
     setUser(userInfo);
     if (!userInfo) navigate("/auth");
   }, []);
+
+  console.log(user);
 
   return (
     <blogContext.Provider
