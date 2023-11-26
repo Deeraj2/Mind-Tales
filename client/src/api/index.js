@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const API = axios.create({ baseURL: "http://localhost:7000" });
+const API = axios.create({ baseURL: "https://mind-tales-backend-1.onrender.com" });
 
 export const singup = (formData) => API.post(`/user/signup`, formData);
 export const signin = (formData) => API.post(`/user/signin`, formData);
