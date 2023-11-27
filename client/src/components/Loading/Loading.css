@@ -16,8 +16,8 @@
 }
 .leo-border-1 {
   position: absolute;
-  width: 150px;
-  height: 150px;
+  width: 50px;
+  height: 50px;
   padding: 3px;
   display: flex;
   justify-content: center;
@@ -41,8 +41,8 @@
 
 .leo-border-2 {
   position: absolute;
-  width: 150px;
-  height: 150px;
+  width: 50px;
+  height: 50px;
   padding: 3px;
   display: flex;
   justify-content: center;
